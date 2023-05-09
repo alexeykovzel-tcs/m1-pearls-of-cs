@@ -1,0 +1,12 @@
+.device atmega168 	; type of processor
+.equ DDRB = 4 		; address of data-direction register
+.equ PORTB = 5 		; address of output port register 
+
+ldi r16,$20 		; register 16 now contains 0010 0000
+out DDRB,r16		; indicate which bit will be used as an input
+	 		 
+ldi r16,$00		; rewrite value in register 16 to 0000 0000
+out PORTB,r16		; turn LED off 
+
+again:
+rjmp again 		; infinite loop: jump back to the label

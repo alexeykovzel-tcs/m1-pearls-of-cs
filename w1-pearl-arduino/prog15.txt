@@ -1,0 +1,24 @@
+.device atmega168
+ldi	r16,$0			; init value
+ldi	r17,$F			; one multiplicand
+ldi	r18,$F			; the other multiplicand
+
+ldi	r19,$4			; loop cycles || number of input bits
+ldi	r20,$1			; first bit to multiply
+
+loop4bit: 
+	mov	r22,r18		; copy second multiplicand
+	and	r22,r20		; check taken bit with second multiplicand
+	breq	jump
+	add	r16,r17		; add to result if 1 else ignore
+	
+	jump:	
+	lsl	r17		; shift first multiplicand
+	lsl	r20		; next bit to multiply
+	dec	r19
+	brne	loop4bit	; repeat cycle
+
+call	sendr16tolaptop		; send calculation result to laptop
+again:
+rjmp	again			; finished, go into infinite loop
+.include "rs232link.inc"

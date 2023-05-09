@@ -1,0 +1,30 @@
+.device atmega168		; type of processor
+.equ	DDRB	= 4		; address of data-direction register
+.equ	PORTB	= 5		; address of output port register
+.equ	val	= 1998
+
+ldi	r16,$10
+ldi 	r17,$00
+ldi 	r18,$32
+
+out	DDRB,r16
+out	PORTB,r16
+
+loop:	
+	out	PORTB,r16
+        rcall   delay0
+	out 	PORTB,r17
+	rcall	delay0	
+
+    	rjmp	loop
+delay0:
+	ldi	r24,low(val)
+	ldi 	r25,high(val)
+delay1: sbiw	r24,1
+	brne	delay1
+
+	dec	r18
+	brne	delay0
+
+	nop
+	ret

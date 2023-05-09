@@ -1,0 +1,11 @@
+#   Task 2.20
+words = util.words("/home/aliakseik/Practicals/W2_Algorithms/labfiles/grail.txt")
+print("Number of different words in Unabr.dict: ")
+print(str(len(remove_dups(words))) + '\n')
+
+words = util.words("/home/aliakseik/Practicals/W2_Algorithms/labfiles/hacktest.txt")
+print("Number of different words in hacktest.txt: ")
+print(len(remove_dups(words)))
+
+#   (b) In the files above not all duplicates are removed as it is an unordered list and the algorithm
+#   compares only sequent elements and will miss the duplication which is separated by another element

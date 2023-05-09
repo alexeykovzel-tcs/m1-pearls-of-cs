@@ -1,0 +1,13 @@
+.device atmega168 	; what type of processor do we use? don’t change!
+.equ DDRB = 4 		; address of data-direction register; don’t change!
+.equ PORTB = 5 		; address of output port register; don’t change!
+			;
+ldi r16,$20 		; register 16 now contains 0010 0000
+out DDRB,r16 		; write this to the data-direction-register to make
+ldi r16,$00		; the pin with the LED act as output
+out PORTB,r16 		; and also write to the port itself, which switches
+			; the LED on
+again: 			; this is not an instruction, but a label, as
+			; indicated by the colon at the end
+rjmp again 		; infinite loop: jump back to the label
+			; note: do not use rjmp -1 anymore, only use labels!

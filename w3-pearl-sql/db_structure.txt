@@ -1,0 +1,39 @@
+table study:
+    study_code primary key,
+    study
+
+table student:
+    student_id primary key,
+    study_code foreign key
+    student
+
+table teacher:
+    teacher_id primary key,
+    teacher
+    start_date
+    end_date
+
+table course:
+    course_code primary key,
+    study_code foreign key
+    course
+    description
+    ects
+
+table course_edition:
+    course_code composite key. foreign key
+    year composite key
+    quarter composite key
+    main_teacher_id int, foreign key
+
+table final_grade:
+    course_code composite key, foreign key
+    student_id composite key, foreign key
+    grade
+    name 
+
+table teaches:
+    teacher_id composite key,  foreign key
+    course_code composite key,  foreign key
+    year composite key,  foreign key
+    quarter composite key,  foreign key

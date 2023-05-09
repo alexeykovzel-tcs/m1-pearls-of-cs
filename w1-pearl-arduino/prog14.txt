@@ -1,0 +1,116 @@
+.device atmega168		; type of processor
+.equ	DDRB	= 4             ; address of data-direction register
+.equ	PORTB	= 5             ; address of output port register
+.equ	IN	= 4
+ 
+.equ	dly	= 5998
+
+.equ	aDly	= 2
+.equ	bDly	= 4
+.equ	cDly	= 6
+.equ	dDly	= 8	
+
+.equ	aPer	= 155
+.equ	bPer	= 130
+.equ	cPer	= 110
+.equ	dPer	= 100
+
+sbi	DDRB,IN
+
+; Samsung Tune (Original Ringtone) 2010
+; YouTube link:
+; https://www.youtube.com/watch?v=Mte6ww1g0Vo&a>
+
+loop:
+	rcall	aMel
+	;rcall	smlDly
+	;rcall	smlDly
+	;rcall	smlDly
+
+	rcall	aMel
+	;rcall	smlDly
+	rcall	dMel
+	;rcall	smlDly
+	;rcall	smlDly
+
+	rcall	aMel
+	rcall	bMel
+	rcall	cMel
+	rcall	dMel
+	;rcall	smlDly
+	;rcall	smlDly
+	;rcall	smlDly
+
+	rcall	aMel
+	rcall	bMel
+	rcall	cMel
+	rcall	dMel
+	;rcall	smlDly
+	rcall	aMel
+	
+	;rcall	smlDly
+	;rcall	smlDly
+	;rcall	smlDly	
+        
+	rjmp	loop
+
+aMel:
+	ldi	r26,low(aDly)
+	ldi	r27,high(aDly)
+	ldi	r30,aPer
+	rcall	dfMel
+	ret
+
+bMel:
+	ldi	r26,low(bDly)
+	ldi	r27,high(bDly)
+	ldi	r30,bPer
+	rcall	dfMel
+	ret
+
+cMel:
+	ldi	r26,low(cDly)
+	ldi	r27,high(cDly)
+	ldi	r30,cPer
+	rcall	dfMel
+	ret
+
+dMel:
+	ldi	r26,low(dDly)
+	ldi	r27,high(dDly)
+	ldi	r30,dPer
+	rcall	dfMel
+	ret
+
+smlDly:
+	ldi	r26,low(dly)
+	ldi	r27,high(dly)
+	ldi	r28,$FF
+	rcall	dfDly
+	ret
+
+dfMel:
+	iMel:
+		sbi	PORTB,IN
+		ldi	r28,$32
+		rcall	dfDly
+		cbi	PORTB,IN		
+		ldi     r28,$32
+		rcall	dfDly
+
+		sbiw	r30,1
+		brne	iMel
+	ret 
+
+dfDly:
+	mov	r24,r26
+	mov	r25,r27
+iDly:
+	sbiw	r24,1
+	brne	iDly
+
+	sbiw	r28,1
+	brne	dfDly
+	
+	nop
+	ret

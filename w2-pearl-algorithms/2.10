@@ -1,0 +1,5 @@
+(a) linear search - 2 times longer
+    binary search - +xw (time for 1 operation)
+
+(b) linear search - n * w
+    binary search - w * log2(n)

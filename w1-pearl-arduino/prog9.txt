@@ -1,0 +1,9 @@
+e0f0 e6e1 e800 8300 e008 8300	; slows down the processor in 256 times
+				;
+e200 b904 e200 b905 e000 b905	; turn on and off the LED 
+				;
+0000 0000 0000 0000		; 10 times delay
+0000 0000 0000 0000		;
+0000 0000 			;
+				;
+940c 0008			; jump to the beginning

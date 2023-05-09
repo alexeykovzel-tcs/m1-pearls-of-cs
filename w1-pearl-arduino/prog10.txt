@@ -1,0 +1,2 @@
+E30B		; write value 3B to r16
+940e 0200	; send r16 value to laptop 
